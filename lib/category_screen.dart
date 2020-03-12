@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:unitconverter/category.dart';
+import 'package:unitconverter/unit.dart';
 
 final _backgroundColor = Colors.lightGreenAccent[50];
 
@@ -34,6 +35,16 @@ class CategoryScreen extends StatelessWidget {
     );
   }
 
+  List<Unit> _retrieveUnitList(String categoryName) {
+    return List.generate(10, (int i) {
+      i += 1;
+      return Unit(
+        '$categoryName Unit $i',
+        i.toDouble(),
+      );
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final categories = <Category>[];
@@ -43,6 +54,7 @@ class CategoryScreen extends StatelessWidget {
         name: _categoryNames[i],
         color: _baseColors[i],
         iconLocation: Icons.cake,
+        units: _retrieveUnitList(_categoryNames[i]),
       ));
     }
 
@@ -57,8 +69,7 @@ class CategoryScreen extends StatelessWidget {
       title: Text(
         'Unit Converter',
         style: TextStyle(
-            color: Colors.black,
-            fontSize: 30.0
+            fontSize: 20.0
         ),
       ),
       centerTitle: true,
